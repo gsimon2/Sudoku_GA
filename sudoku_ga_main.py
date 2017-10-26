@@ -18,8 +18,8 @@ import copy # Allows deep copying of individuals
 import atexit # Allows to run a function before exit. Used to pull up GUI for last elite individual
 
 
-POP_SIZE = 200
-GEN_COUNT = 500
+POP_SIZE = 400
+GEN_COUNT = 2000
 MUTATION_PROB = 0.15
 TOURNAMENT_SIZE = 2
 CURRENT_GEN = 0
