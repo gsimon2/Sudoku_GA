@@ -40,7 +40,7 @@ class SudokuUI(Frame):
 		self.parent.mainloop()
 
 	def __initUI(self):
-		self.parent.title("Sudoku")
+		self.parent.title("ID: {} \t Fitness: {}".format(self.game.ID, self.game.total_fitness))
 		self.pack(fill=BOTH, expand=1)
 		self.canvas = Canvas(self,
 							width=WIDTH,
@@ -73,11 +73,24 @@ class SudokuUI(Frame):
 		self.canvas.delete("numbers")
 		for i in xrange(self.dimension_size**2):
 			for j in xrange(self.dimension_size**2):
-				answer = self.game[i][j]
+				answer = self.game.puzzle[i][j]
 				if answer != 0:
 					x = MARGIN + j * SIDE + SIDE / 2
 					y = MARGIN + i * SIDE + SIDE / 2
-					color = "black"
+					
+					# Set color based off of fitness of element
+					if self.game.fitness_map[i][j] == 0:
+						color = "black"
+					elif self.game.fitness_map[i][j] == 1:
+						color = "red"
+					elif self.game.fitness_map[i][j] == 2:
+						color = "blue"
+					elif self.game.fitness_map[i][j] == 3:
+						color = "green"
+					else:
+						print('Error - element in game has a fitness outside of [0,3]')
+						exit()
+					
 					self.canvas.create_text(
 						x, y, text=answer, tags="numbers", fill=color
 					)
